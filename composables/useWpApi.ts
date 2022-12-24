@@ -2,7 +2,7 @@ import { Post } from '~~/types/Post'
 
 export default async () => {
     const config = useRuntimeConfig();
-    const WP_URL: string = config.wpUrl;
+    const WP_URL: string = config.wpUri;
 
     const get = async <T>(endpoint: string) => {
         return useFetch<T>(`${WP_URL}/wp-json/wp/v2/${endpoint}`);

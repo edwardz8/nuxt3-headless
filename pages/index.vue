@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+import useWpApi from "~~/composables/useWpApi";
 useHead({
     title: "Home",
     meta: [
@@ -12,7 +13,7 @@ useHead({
 
 const { data: posts } = await (await useWpApi()).getPosts();
 
-// const { data: posts } = useFetch('https://dfs-graphs/wp-json/wp/v2/posts');
+// const { data: posts } = useFetch('https://wp-nuxt-demo/wp-json/wp/v2/posts')
 </script>
 
 <template>
