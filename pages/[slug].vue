@@ -1,24 +1,11 @@
 <script lang="ts" setup>
-
-const params = useRoute().params;
-
-const { data: posts } = await useWpApi().getPost(params.slug as string);
-
-const post = posts.value?.[0];
-
-useHead({
-  title: post?.title.rendered,
-  meta: [
-    {
-      name: "description",
-      content: `${post?.excerpt.rendered}`,
-    },
-  ],
-});
+const { params } = useRoute();
+const { data: posts } = await useWpApi().getPost<any>(params.slug as string);
+const post = posts.value[0];
 </script>
 
 <template>
-    <section class="container blog py-10 sm:py-16">
+    <section class="container mx-auto py-10 py-4 px-4">
         <div class="sm:px-20">
             <!-- Blog Title  -->
             <h1 class="blog_title text-3xl sm:text-5xl font-bold text-center mb-5">
@@ -36,7 +23,7 @@ useHead({
             </div>
             <!-- Blog Image  -->
             <div class="blog_image h-[250px] sm:h-[500px] w-full rounded shadow-xl relative overflow-hidden mb-12">
-                <img :src="post._embedded['wp:featuredmedia'][0]?.source_url" :alt="post.title.rendered"
+                <img :src="post._embedded['wp:featuredmedia'][0]?.source_url" alt="blog thumbnail"
                     class="absolute w-full h-full object-cover" />
             </div>
             <div>

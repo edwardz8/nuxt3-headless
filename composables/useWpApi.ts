@@ -1,37 +1,34 @@
-import { Post } from '~~/types/Post'
-
-export default async () => {
+export default () => {
     const config = useRuntimeConfig();
-    const WP_URL: string = config.wpUri;
+    const wpUri = config.public.wpUri;
 
-    const get = async <T>(endpoint: string) => {
-        return useFetch<T>(`${WP_URL}/wp-json/wp/v2/${endpoint}`);
-    };
+    // get
+    const get = async <T>(endpoint: string) =>
+        useFetch<T>(`${wpUri}/wp-json/wp/v2/${endpoint}`);
 
-    const getPosts = async (
-        category?: number,
+    // Get All Posts
+    const getPosts = async <T>(
+        categories?: number,
         page: number = 1,
-        perPage: number = 20,
-        fields: string = "author,id,excerpt,title,link,slug,date"
+        perPage: number = 9
     ) => {
-        let query: string = `posts?page=${page}&per_page=${perPage}&_embed=1`;
-        if (category) {
-            query += `&categories=${category}`;
+        let query = `posts?_embed&per_page=${perPage}&page=${page}`;
+        if (categories) {
+            query += `&categories=${categories}`;
         }
-        return get<Post[]>(query); 
+        return get<T>(query);
     };
 
-    const getPost = async (slug: string) => {
-        return get<Post>(`posts?slug=${slug}&_embed=1`);
-    };
+    // Get a Single Post
+    const getPost = async <T>(slug: string) =>
+        get<T>(`posts?slug=${slug}&_embed`);
 
-    const getCategories = async (fields: string = "name,slug,count") => {
-        return get<any>(`categories`);
-    };
+    // Get All Categories
+    const getCategories = async <T>() => get<T>("categories");
 
-    const getCategory = async (slug: string) => {
-        return get<any>(`categories?slug=${slug}`);
-    };
+    // Get a Single Category
+    const getCategory = async <T>(slug: string) =>
+        get<T>(`categories?slug=${slug}`);
 
     return {
         get,

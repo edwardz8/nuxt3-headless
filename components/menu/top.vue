@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-gray-700 text-white py-5 px-5">
+    <nav class="bg-zinc-800 text-white py-5 px-5">
         <div class="container flex justify-between">
             <NuxtLink to="/" class="logo text-xl font-bold">WP + Nuxt Blog</NuxtLink>
             <ul class="inline-flex gap-2">

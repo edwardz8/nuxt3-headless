@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 defineProps<{
-    title: string;
+    title?: string;
     excerpt?: string;
     image?: string;
     slug?: string;
@@ -8,14 +8,14 @@ defineProps<{
 </script>
 
 <template>
-    <div class="grid shadow-xl group overflow-hidden rounded">
+    <div class="container mx-auto shadow-xl col-span-1 group overflow-hidden rounded">
         <div v-if="image" class="grid__image h-[180px] w-full relative overflow-hidden">
             <img :src="image" :alt="title"
                 class="absolute object-cover w-full h-full group-hover:scale-110 duration-300" />
         </div>
-        <div class="grid__content p-5">
-            <h3 class="grid__content-title text-xl font-semibold mb-2">{{ title }}</h3>
-            <p v-if="excerpt" class="grid__content-excerpt mb-2 text-sm text-clip overflow-hidden">{{ excerpt }}</p>
+        <div class="p-5">
+            <h3 class="text-xl font-semibold mb-2">{{ title }}</h3>
+           <!--  <p v-if="excerpt" class="grid__content-excerpt mb-2 text-sm text-clip overflow-hidden">{{ excerpt }}</p> -->
             <NuxtLink v-if="slug" class="blog__readmore border-b-2 border-primary-500 inline-flex items-center"
                 :to="`/${slug}`">Read more
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
