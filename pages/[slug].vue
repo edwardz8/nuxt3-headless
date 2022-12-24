@@ -1,21 +1,20 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+
 const params = useRoute().params;
+
+const { data: posts } = await useWpApi().getPost(params.slug as string);
+
+const post = posts.value?.[0];
+
 useHead({
-  title: `${params.slug}`,
+  title: post?.title.rendered,
   meta: [
     {
       name: "description",
-      content: `${params.slug}`,
+      content: `${post?.excerpt.rendered}`,
     },
   ],
 });
-
-const { data: posts } = useFetch('https://dfs-graphs/wp-json/wp/v2/posts');
-
-// const { data: posts } = await (await useWpApi()).getPost(params.slug as string)
-
-const post = posts.value[0];
-
 </script>
 
 <template>

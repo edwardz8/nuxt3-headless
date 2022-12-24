@@ -11,6 +11,7 @@ useHead({
     titleTemplate: "dfs graphs - %s",
 });
 
+
 const { data: posts } = await (await useWpApi()).getPosts();
 
 // const { data: posts } = useFetch('https://wp-nuxt-demo/wp-json/wp/v2/posts')
