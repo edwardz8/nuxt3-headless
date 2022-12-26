@@ -12,9 +12,7 @@ useHead({
     titleTemplate: "wordpress + nuxt 3 = headless - %s",
 });
 
-const { data: posts } = await useWpApi().getPosts<any>();
-
-// const { data: posts } = useFetch('https://wp-nuxt-demo/wp-json/wp/v2/posts')
+const { data: posts } = await useWpApi().getPosts();
 </script>
 
 <template>
@@ -34,9 +32,13 @@ const { data: posts } = await useWpApi().getPosts<any>();
         <!-- Blog Section Starts -->
         <section class="container mx-auto py-16 px-2">
             <div class="grid sm:grid-cols-3 gap-5">
-                <blog-card v-for="post in posts" :key="post.id" :title="post.title.rendered"
-                    :excerpt="post.excerpt.rendered" :slug="post.slug"
-                    :image="post._embedded['wp:featuredmedia'][0]?.source_url" />
+                <blog-card v-for="post in posts"
+                    :key="post.id"
+                    :title="post.title.rendered"
+                    :excerpt="post.excerpt.rendered"
+                    :slug="post.slug"
+                    />
+                    <!-- :image="post._embedded['wp:featuredmedia'][0]?.source_url" -->
             </div>
         </section>
         <!-- Blog Section Ends  -->

@@ -1,19 +1,29 @@
-<script lang="ts" setup>
-const route = useRoute();
+<script setup lang="ts">
+const params = useRoute().params;
 
 // Get Category ID
-const { data: category } = await useWpApi().get<any>(
-  `categories?slug=${route.params.slug}`
+const { data: categories, error } = await useWpApi().getCategory(
+  params.slug as string
 );
 
 // Get Post Related to category Id
-const { data: posts } = await useWpApi().getPosts<any>(category.value[0].id);
+const category = categories.value[0];
+const { data: posts } = await useWpApi().getPosts(category.id);
 
+useHead({
+  title: `Archive: ${category.name}`,
+  meta: [
+    {
+      name: "description",
+      content: `Category ${params.slug}`,
+    },
+  ],
+});
 </script>
 
 <template>
-  <PageHeader :title="`Archive: ${category[0].name}`"></PageHeader>
-  <section class="blogs blogs-archive">
+  <PageHeader :title="`Archive: ${category.name}`"></PageHeader>
+  <section class="blogs-archive">
     <div class="container py-10">
       <div class="grid sm:grid-cols-3 gap-10">
         <blog-card v-for="post in posts" :key="post.id" :title="post.title.rendered"

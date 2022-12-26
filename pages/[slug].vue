@@ -1,12 +1,23 @@
-<script lang="ts" setup>
-const { params } = useRoute();
-const { data: posts } = await useWpApi().getPost<any>(params.slug as string);
-const post = posts.value[0];
+<script setup>
+const params = useRoute().params;
+
+const { data: posts } = await useWpApi().getPost(params.slug);
+const post = posts.value?.[0];
+
+useHead({
+  title: post?.title.rendered,
+  meta: [
+    {
+      name: "description",
+      content: `${post?.excerpt.rendered}`,
+    },
+  ],
+});
 </script>
 
 <template>
     <section class="container mx-auto py-10 py-4 px-4">
-        <div class="sm:px-20">
+        <div v-if="post" class="sm:px-20">
             <!-- Blog Title  -->
             <h1 class="blog_title text-3xl sm:text-5xl font-bold text-center mb-5">
                 {{ post.title.rendered }}
