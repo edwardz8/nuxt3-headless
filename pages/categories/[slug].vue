@@ -2,7 +2,7 @@
 const params = useRoute().params;
 
 // Get Category ID
-const { data: categories, error } = await useWpApi().getCategory(
+const { data: categories } = await useWpApi().getCategory(
   params.slug as string
 );
 

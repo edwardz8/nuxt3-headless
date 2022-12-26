@@ -23,7 +23,7 @@ const { data: categories } = await useWpApi().getCategories<any>();
           v-for="category in categories"
           :key="(category as any).id"
           :to="`/categories/${(category as any).slug}`"
-          class="flex items-center justify-center py-2 px-2 rounded text-white shadow-md hover:shadow-lg duration-200 text-lg uppercase"
+          class="flex items-center justify-center py-2 px-2 rounded text-white shadow-md hover:shadow-lg duration-200 text-sm uppercase"
           :style="{ backgroundColor: colorGenerator() }"
         >
           <span class="font-md">#{{ (category as any).name }}</span>
