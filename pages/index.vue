@@ -9,7 +9,7 @@ useHead({
             content: "Home",
         },
     ],
-    titleTemplate: "wordpress + nuxt 3 = headless - %s",
+    titleTemplate: "Vue & Wordpress Headless Blog - %s",
 });
 
 const { data: posts } = await useWpApi().getPosts();
