@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 defineProps<{
-    title?: string;
+    title: string;
     excerpt?: string;
     image?: string;
     slug?: string;
@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
     <div class="container mx-auto shadow-xl col-span-1 group overflow-hidden rounded">
-        <div v-if="image" class="grid__image h-[180px] w-full relative overflow-hidden">
+        <div class="grid__image h-[180px] w-full relative overflow-hidden">
             <img :src="image" :alt="title"
                 class="absolute object-cover w-full h-full group-hover:scale-110 duration-300" />
         </div>
