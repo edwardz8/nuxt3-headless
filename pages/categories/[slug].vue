@@ -24,8 +24,8 @@ useHead({
 <template>
   <PageHeader :title="`Archive: ${category.name}`"></PageHeader>
   <section class="blogs-archive">
-    <div class="container py-10">
-      <div class="grid sm:grid-cols-3 gap-10">
+    <div class="container p-10">
+      <div class="grid sm:grid-cols-3 gap-5">
         <blog-card v-for="post in posts" :key="post.id" :title="post.title.rendered"
           :image="post._embedded['wp:featuredmedia'][0]?.source_url" :excerpt="post.excerpt.rendered" :slug="post.slug" />
       </div>
